@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
+    // Movement
     public float moveSpeed = 1;
     public float moveSpeedMinMax = 1;
     public float sprintSpeedMinMax = 1.5f;
@@ -15,6 +16,15 @@ public class Player : MonoBehaviour {
 
     private Vector3 velocityClamped;
     private Vector3 sprintVelocity;
+    
+    // Power Ups
+    private bool ExtraJump;
+    private bool candoublejump;
+
+
+    // Health
+    public float Health = 6;
+    public AnimationClip clip;
 
     void Start()
     {
@@ -26,6 +36,13 @@ public class Player : MonoBehaviour {
         CheckMovement();
         CheckSprint();
         CheckJump();
+        HealthManager();
+        Hit();
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            Health--;
+        }
     }
 
     void CheckMovement()
@@ -39,6 +56,15 @@ public class Player : MonoBehaviour {
 
         rb.AddRelativeForce(forceVector);
         rb.velocity = velocityClamped;
+
+        if(horInput != 0 || verInput != 0)
+        {
+            GetComponent<Animator>().SetBool("IsWalking", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("IsWalking", false);
+        }
     }
 
     void CheckJump()
@@ -55,24 +81,65 @@ public class Player : MonoBehaviour {
                 isGrounded = false;
             }
             if (Input.GetKeyDown(KeyCode.Space))
+            {
                 if (isGrounded)
+                {
                     Jump();
+                    if(ExtraJump == true)
+                    {
+                        candoublejump = true;
+                    }
+                }
+                else
+                {
+                    if(candoublejump)
+                    {
+                        rb.AddRelativeForce(Vector3.up * force);
+                        GetComponent<Animation>().Stop();
+                    }
+                }
+            }
         }
     }
 
     void Jump()
     {
-        rb.AddRelativeForce(Vector3.up * force);
+            rb.AddRelativeForce(Vector3.up * force);
     }
 
     void CheckSprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
             Sprint();
+        }
     }
 
     void Sprint()
     {
         rb.velocity = sprintVelocity;
+    }
+
+    void HealthManager()
+    {
+      if(Health <= 0)
+        {
+            GetComponent<Animator>().SetBool("IsDead", true);
+        }
+    }
+
+    void Hit()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            GetComponent<Animator>().SetBool("IsFighting", true);
+            StartCoroutine(Punching());
+        }
+    }
+
+    IEnumerator Punching()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<Animator>().SetBool("IsFighting", false);
     }
 }
