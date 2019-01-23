@@ -24,7 +24,6 @@ public class Player : MonoBehaviour {
 
     // Health
     public float Health = 6;
-    public AnimationClip clip;
 
     void Start()
     {
@@ -57,7 +56,10 @@ public class Player : MonoBehaviour {
         rb.AddRelativeForce(forceVector);
         rb.velocity = velocityClamped;
 
-        if(horInput != 0 || verInput != 0)
+        //Vector3 movement = new Vector3(horInput, 0.0f, verInput);
+        //transform.rotation = Quaternion.LookRotation(movement);
+
+        if (horInput != 0 || verInput != 0)
         {
             GetComponent<Animator>().SetBool("IsWalking", true);
         }
@@ -95,7 +97,6 @@ public class Player : MonoBehaviour {
                     if(candoublejump)
                     {
                         rb.AddRelativeForce(Vector3.up * force);
-                        GetComponent<Animation>().Stop();
                     }
                 }
             }
