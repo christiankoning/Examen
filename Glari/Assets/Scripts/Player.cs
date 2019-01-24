@@ -12,7 +12,9 @@ public class Player : MonoBehaviour {
     private bool isGrounded;
     public float force = 500;
 
+
     public Rigidbody rb;
+    public GameObject Model;
 
     private Vector3 velocityClamped;
     private Vector3 sprintVelocity;
@@ -56,16 +58,16 @@ public class Player : MonoBehaviour {
         rb.AddRelativeForce(forceVector);
         rb.velocity = velocityClamped;
 
-        //Vector3 movement = new Vector3(horInput, 0.0f, verInput);
-        //transform.rotation = Quaternion.LookRotation(movement);
+        Vector3 movement = new Vector3(horInput, 0.0f, verInput);
+        Model.transform.rotation = Quaternion.LookRotation(movement).normalized;
 
         if (horInput != 0 || verInput != 0)
         {
-            GetComponent<Animator>().SetBool("IsWalking", true);
+            Model.GetComponent<Animator>().SetBool("IsWalking", true);
         }
         else
         {
-            GetComponent<Animator>().SetBool("IsWalking", false);
+            Model.GetComponent<Animator>().SetBool("IsWalking", false);
         }
     }
 
@@ -125,7 +127,7 @@ public class Player : MonoBehaviour {
     {
       if(Health <= 0)
         {
-            GetComponent<Animator>().SetBool("IsDead", true);
+            Model.GetComponent<Animator>().SetBool("IsDead", true);
         }
     }
 
@@ -133,7 +135,7 @@ public class Player : MonoBehaviour {
     {
         if(Input.GetMouseButtonDown(0))
         {
-            GetComponent<Animator>().SetBool("IsFighting", true);
+            Model.GetComponent<Animator>().SetBool("IsFighting", true);
             StartCoroutine(Punching());
         }
     }
@@ -141,6 +143,6 @@ public class Player : MonoBehaviour {
     IEnumerator Punching()
     {
         yield return new WaitForSeconds(0.5f);
-        GetComponent<Animator>().SetBool("IsFighting", false);
+        Model.GetComponent<Animator>().SetBool("IsFighting", false);
     }
 }

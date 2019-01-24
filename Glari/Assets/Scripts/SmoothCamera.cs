@@ -7,15 +7,14 @@ public class SmoothCamera : MonoBehaviour {
     public GameObject Player;
 
     private Vector3 CameraPos;
-
     
     void Start()
-    {     
+    {
         CameraPos = transform.position - Player.transform.position;
     }
 
-    void LateUpdate()
-    {  
+    void Update()
+    {
         transform.position = Player.transform.position + CameraPos;
     }
 }
