@@ -26,6 +26,10 @@ public class Player : MonoBehaviour {
 
     // Health
     public float Health = 6;
+    public Sprite FullHealth;
+    public Sprite HeartLost;
+    public Sprite TwoHeartsLost;
+    public Sprite NoHealth;
 
     void Start()
     {
