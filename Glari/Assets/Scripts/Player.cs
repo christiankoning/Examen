@@ -25,11 +25,7 @@ public class Player : MonoBehaviour {
 
 
     // Health
-    public float Health = 6;
-    public Sprite FullHealth;
-    public Sprite HeartLost;
-    public Sprite TwoHeartsLost;
-    public Sprite NoHealth;
+    public float Health = 3;
 
     void Start()
     {
@@ -132,6 +128,7 @@ public class Player : MonoBehaviour {
       if(Health <= 0)
         {
             Model.GetComponent<Animator>().SetBool("IsDead", true);
+            rb.isKinematic = true;
         }
     }
 
