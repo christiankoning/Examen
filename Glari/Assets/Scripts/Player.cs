@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class Player : MonoBehaviour
+{
 
     // Movement
     public float moveSpeed = 1;
@@ -18,9 +19,10 @@ public class Player : MonoBehaviour {
 
     private Vector3 velocityClamped;
     private Vector3 sprintVelocity;
-    
-    // Power Ups
+
+    // Power Ups & Collectible
     private bool ExtraJump;
+    private bool CanShoot;
     private bool candoublejump;
 
 
@@ -89,16 +91,17 @@ public class Player : MonoBehaviour {
                 if (isGrounded)
                 {
                     Jump();
-                    if(ExtraJump == true)
+                    if (ExtraJump == true)
                     {
                         candoublejump = true;
                     }
                 }
                 else
                 {
-                    if(candoublejump)
+                    if (candoublejump)
                     {
                         rb.AddRelativeForce(Vector3.up * force);
+                        candoublejump = false;
                     }
                 }
             }
@@ -107,7 +110,7 @@ public class Player : MonoBehaviour {
 
     void Jump()
     {
-            rb.AddRelativeForce(Vector3.up * force);
+        rb.AddRelativeForce(Vector3.up * force);
     }
 
     void CheckSprint()
@@ -125,7 +128,7 @@ public class Player : MonoBehaviour {
 
     void HealthManager()
     {
-      if(Health <= 0)
+        if (Health <= 0)
         {
             Model.GetComponent<Animator>().SetBool("IsDead", true);
             rb.isKinematic = true;
@@ -134,7 +137,7 @@ public class Player : MonoBehaviour {
 
     void Hit()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             Model.GetComponent<Animator>().SetBool("IsFighting", true);
             StartCoroutine(Punching());

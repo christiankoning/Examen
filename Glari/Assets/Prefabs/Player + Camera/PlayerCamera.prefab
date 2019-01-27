@@ -22,6 +22,8 @@ GameObject:
   - component: {fileID: 20336833057179344}
   - component: {fileID: 81679602689504048}
   - component: {fileID: 114947245120787994}
+  - component: {fileID: 45327184174408968}
+  - component: {fileID: 114605682384906906}
   m_Layer: 0
   m_Name: PlayerCamera
   m_TagString: Untagged
@@ -82,6 +84,14 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!45 &45327184174408968
+Skybox:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444801516451108}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: 2bd8959f5fbd3644aa33af1a155fc147, type: 2}
 --- !u!81 &81679602689504048
 AudioListener:
   m_ObjectHideFlags: 1
@@ -89,6 +99,19 @@ AudioListener:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1444801516451108}
   m_Enabled: 1
+--- !u!114 &114605682384906906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444801516451108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13ba49b5c9027a545aec0b13611687c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PausePanel: {fileID: 0}
+  isPaused: 0
 --- !u!114 &114947245120787994
 MonoBehaviour:
   m_ObjectHideFlags: 1
