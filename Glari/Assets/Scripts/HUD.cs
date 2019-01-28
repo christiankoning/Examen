@@ -18,6 +18,7 @@ public class HUD : MonoBehaviour {
     void Update()
     {
         PlayerHealthManager();
+        CollectibleManager();
     }
 
     void PlayerHealthManager()
@@ -45,6 +46,6 @@ public class HUD : MonoBehaviour {
 
     void CollectibleManager()
     {
-        Collecting.text = player.Collected + "/ 3";
+        Collecting.text = player.Collected + "/3";
     }
 }

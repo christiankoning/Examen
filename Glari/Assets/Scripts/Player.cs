@@ -24,8 +24,9 @@ public class Player : MonoBehaviour
     private bool ExtraJump;
     private bool CanShoot;
     private bool candoublejump;
+    public GameObject DoubleJumpPower;
+    public GameObject ShootPower;
     public int Collected;
-
 
     // Health
     public float Health = 3;
@@ -139,10 +140,15 @@ public class Player : MonoBehaviour
 
     void Hit()
     {
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && CanShoot == false)
         {
             Model.GetComponent<Animator>().SetBool("IsFighting", true);
             StartCoroutine(Punching());
+        }
+
+        if(Input.GetMouseButton(0) && CanShoot == true)
+        {
+            //Shoot
         }
     }
 
@@ -158,5 +164,34 @@ public class Player : MonoBehaviour
         {
             // Player is allowed to finish the level
         }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject == DoubleJumpPower)
+        {
+            ExtraJump = true;
+            StartCoroutine(JumpAbilityTimer());
+            DoubleJumpPower.SetActive(false);
+        }
+
+        if(collision.gameObject == ShootPower)
+        {
+            CanShoot = true;
+            StartCoroutine(ShootAbilityTimer());
+            ShootPower.SetActive(false);
+        }
+    }
+
+    IEnumerator JumpAbilityTimer()
+    {
+        yield return new WaitForSeconds(30);
+        ExtraJump = false;
+    }
+
+    IEnumerator ShootAbilityTimer()
+    {
+        yield return new WaitForSeconds(30);
+        CanShoot = false;
     }
 }
