@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -30,6 +31,11 @@ public class Player : MonoBehaviour
 
     // Health
     public float Health = 3;
+    public GameObject DeathVoid;
+
+    //Finish
+    public GameObject Finish;
+    private bool CanFinish;
 
     void Start()
     {
@@ -135,6 +141,9 @@ public class Player : MonoBehaviour
         {
             Model.GetComponent<Animator>().SetBool("IsDead", true);
             rb.isKinematic = true;
+            Scene currentscene = SceneManager.GetActiveScene();
+            string scenename = currentscene.name;
+            SceneManager.LoadScene(scenename);
         }
     }
 
@@ -162,7 +171,7 @@ public class Player : MonoBehaviour
     {
         if(Collected == 3)
         {
-            // Player is allowed to finish the level
+            CanFinish = true;
         }
     }
 
@@ -180,6 +189,23 @@ public class Player : MonoBehaviour
             CanShoot = true;
             StartCoroutine(ShootAbilityTimer());
             ShootPower.SetActive(false);
+        }
+
+        if(collision.gameObject == DeathVoid)
+        {
+            Health = 0;
+        }
+
+        if (collision.gameObject == Finish)
+        {
+            if(CanFinish == true)
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+                // Not Allowed to finish
+            }
         }
     }
 

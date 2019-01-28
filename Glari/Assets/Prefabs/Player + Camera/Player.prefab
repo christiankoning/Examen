@@ -415,8 +415,7 @@ MonoBehaviour:
   force: 250
   rb: {fileID: 54413919763575838}
   Model: {fileID: 1144301176153052}
-  DoubleJumpPower: {fileID: 1609346709968820, guid: ad75cbc696c46224386bd8fe0e68a484,
-    type: 2}
+  DoubleJumpPower: {fileID: 0}
   ShootPower: {fileID: 1594822890030304, guid: 6c3e51012ebb5c74eb13f5bd67f4ad95, type: 2}
   Collected: 0
   Health: 3

@@ -6,7 +6,6 @@ public class Collectible : MonoBehaviour {
 
     public GameObject Player;
     public Player player;
-    public int Collecting;
 
     void OnTriggerEnter(Collider other)
     {

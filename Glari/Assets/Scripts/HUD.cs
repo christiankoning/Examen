@@ -12,13 +12,16 @@ public class HUD : MonoBehaviour {
     public Image Heart3;
 
     public Text Collecting;
+    public Text TimeLeft;
 
     public Player player;
+    public Timer timer;
 
     void Update()
     {
         PlayerHealthManager();
         CollectibleManager();
+        ShowTime();
     }
 
     void PlayerHealthManager()
@@ -47,5 +50,10 @@ public class HUD : MonoBehaviour {
     void CollectibleManager()
     {
         Collecting.text = player.Collected + "/3";
+    }
+
+    void ShowTime()
+    {
+        TimeLeft.text = "Time:" + timer.Minutes + ":" + timer.Seconds;
     }
 }
