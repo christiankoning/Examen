@@ -11,6 +11,8 @@ public class HUD : MonoBehaviour {
     public Image Heart2;
     public Image Heart3;
 
+    public Text Collecting;
+
     public Player player;
 
     void Update()
@@ -39,5 +41,10 @@ public class HUD : MonoBehaviour {
             Heart2.sprite = FullHeart;
             Heart3.sprite = FullHeart;
         }
+    }
+
+    void CollectibleManager()
+    {
+        Collecting.text = player.Collected + "/ 3";
     }
 }

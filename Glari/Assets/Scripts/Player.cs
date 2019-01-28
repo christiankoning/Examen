@@ -24,6 +24,7 @@ public class Player : MonoBehaviour
     private bool ExtraJump;
     private bool CanShoot;
     private bool candoublejump;
+    public int Collected;
 
 
     // Health
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         CheckJump();
         HealthManager();
         Hit();
+        Collecting();
 
         if (Input.GetKeyDown(KeyCode.C))
         {
@@ -148,5 +150,13 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(0.5f);
         Model.GetComponent<Animator>().SetBool("IsFighting", false);
+    }
+
+    void Collecting()
+    {
+        if(Collected == 3)
+        {
+            // Player is allowed to finish the level
+        }
     }
 }
