@@ -6,11 +6,14 @@ public class Rocks : MonoBehaviour {
 
     public GameObject SpawnPoint;
     public GameObject Hole;
+    public GameObject RampCollider;
+    public GameObject PlayerObject;
     public Player player;
 
     void Start()
     {
         Physics.IgnoreCollision(Hole.GetComponent<Collider>(), GetComponent<Collider>());
+        Physics.IgnoreCollision(RampCollider.GetComponent<Collider>(), GetComponent<Collider>());
         StartCoroutine(Respawn());
     }
 
@@ -33,7 +36,7 @@ public class Rocks : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-     if(collision.gameObject == player)
+     if(collision.gameObject == PlayerObject)
         {
             player.Health = 0;
         }

@@ -7,6 +7,7 @@ public class Spikes : MonoBehaviour {
     private float RandomStartTime;
     private float RandomEndTime;
     public Player player;
+    public GameObject PlayerObject;
 
     void Start()
     {
@@ -17,21 +18,21 @@ public class Spikes : MonoBehaviour {
 
     void StartAnimation()
     {
-        GetComponent<Animator>().SetBool("IsReady", true);
+        GetComponentInParent<Animator>().SetBool("IsReady", true);
         StartCoroutine(SwitchAnim());
     }
 
     IEnumerator SwitchAnim()
     {
         yield return new WaitForSeconds(RandomStartTime);
-        GetComponent<Animator>().SetBool("IsReady", false);
+        GetComponentInParent<Animator>().SetBool("IsReady", false);
         yield return new WaitForSeconds(RandomEndTime);
         StartAnimation();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject == player)
+        if (collision.gameObject == PlayerObject)
         {
             player.Health--;
         }

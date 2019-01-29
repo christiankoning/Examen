@@ -41,7 +41,8 @@ public class Player : MonoBehaviour
     public GameObject Finish;
     private bool CanFinish;
 
-    // Punching
+    // Sounds
+    public SoundManager SManager;
 
 
     void Start()
@@ -127,6 +128,8 @@ public class Player : MonoBehaviour
     public void Jump()
     {
         rb.AddRelativeForce(Vector3.up * force);
+        SManager.AudioPlayerMovement = SManager.AddAudio(SManager.Jumping, false, 0.2f);
+        SManager.AudioPlayerMovement.Play();
     }
 
     void CheckSprint()
@@ -219,6 +222,8 @@ public class Player : MonoBehaviour
             ExtraJump = true;
             StartCoroutine(JumpAbilityTimer());
             DoubleJumpPower.SetActive(false);
+            SManager.AudioCollecting = SManager.AddAudio(SManager.PowerUp, false, 0.2f);
+            SManager.AudioCollecting.Play();
         }
 
         if(collision.gameObject == ShootPower)
@@ -227,6 +232,8 @@ public class Player : MonoBehaviour
             StartCoroutine(ShootAbilityTimer());
             ShootPower.SetActive(false);
             AntiSpam = true;
+            SManager.AudioCollecting = SManager.AddAudio(SManager.PowerUp, false, 0.2f);
+            SManager.AudioCollecting.Play();
         }
 
         if(collision.gameObject == DeathVoid)
