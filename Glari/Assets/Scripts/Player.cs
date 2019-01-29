@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
     // Finish
     public GameObject Finish;
     private bool CanFinish;
+    public int level;
 
     // Sounds
     public SoundManager SManager;
@@ -48,6 +49,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        level = PlayerPrefs.GetInt("Level");
     }
 
     void Update()
@@ -246,6 +248,8 @@ public class Player : MonoBehaviour
             if(CanFinish == true)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+                level++;
+                PlayerPrefs.SetInt("Level", level);
             }
             else
             {

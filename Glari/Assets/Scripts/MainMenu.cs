@@ -37,7 +37,7 @@ public class MainMenu : MonoBehaviour {
     public void NewGame()
     {
         PlayerPrefs.SetInt("Level", 1);
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Level 1");
     }
 
     public void ContinueGame()
@@ -45,12 +45,12 @@ public class MainMenu : MonoBehaviour {
         
         if(Level == 2)
         {
-            SceneManager.LoadScene("Level2");
+            SceneManager.LoadScene("Level 2");
         }
 
         if(Level == 3)
         {
-            SceneManager.LoadScene("Level3");
+            SceneManager.LoadScene("Level 3");
         }
     }
 
