@@ -28,14 +28,21 @@ public class Player : MonoBehaviour
     public GameObject DoubleJumpPower;
     public GameObject ShootPower;
     public int Collected;
+    public GameObject FireBall;
+    public float ShootForce;
+    public GameObject FirePosition;
+    private bool AntiSpam;
 
     // Health
     public float Health = 3;
     public GameObject DeathVoid;
 
-    //Finish
+    // Finish
     public GameObject Finish;
     private bool CanFinish;
+
+    // Punching
+
 
     void Start()
     {
@@ -117,7 +124,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    void Jump()
+    public void Jump()
     {
         rb.AddRelativeForce(Vector3.up * force);
     }
@@ -149,16 +156,46 @@ public class Player : MonoBehaviour
 
     void Hit()
     {
-        if(Input.GetMouseButtonDown(0) && CanShoot == false)
+        Vector3 fwd = FirePosition.transform.TransformDirection(Vector3.forward);
+        RaycastHit hit;
+        Debug.DrawRay(FirePosition.transform.position, fwd);
+
+        if (Input.GetMouseButtonDown(0) && CanShoot == false)
         {
             Model.GetComponent<Animator>().SetBool("IsFighting", true);
             StartCoroutine(Punching());
+
+            if(Physics.Raycast(FirePosition.transform.position, fwd, out hit, 3))
+            {
+                if(hit.collider.gameObject.GetComponent<Mushroom>())
+                {
+                    Mushroom enemy = hit.collider.GetComponent<Mushroom>();
+                    enemy.MHealth--;
+                    Debug.Log(hit.collider.gameObject);
+                }
+            }
         }
 
-        if(Input.GetMouseButton(0) && CanShoot == true)
+        if(Input.GetMouseButtonDown(0) && CanShoot == true)
         {
-            //Shoot
+            if(AntiSpam == true)
+            {
+                GameObject FireObject = (GameObject)Instantiate(FireBall, FirePosition.transform.position + transform.forward, Quaternion.Euler(Model.transform.rotation.eulerAngles.x, Model.transform.rotation.eulerAngles.y, Model.transform.rotation.eulerAngles.z));
+                Vector3 myForward = Model.transform.TransformDirection(Vector3.forward);
+                FireObject.GetComponent<Rigidbody>().AddForce(myForward * ShootForce);
+                Fire FD = FireObject.GetComponent<Fire>();
+                FD.DestroyFire();
+                FireObject.transform.parent = null;
+                AntiSpam = false;
+                StartCoroutine(ShotCoolDown());
+            }
         }
+    }
+
+    IEnumerator ShotCoolDown()
+    {
+        yield return new WaitForSeconds(1);
+        AntiSpam = true;
     }
 
     IEnumerator Punching()
@@ -189,6 +226,7 @@ public class Player : MonoBehaviour
             CanShoot = true;
             StartCoroutine(ShootAbilityTimer());
             ShootPower.SetActive(false);
+            AntiSpam = true;
         }
 
         if(collision.gameObject == DeathVoid)
@@ -206,6 +244,16 @@ public class Player : MonoBehaviour
             {
                 // Not Allowed to finish
             }
+        }
+
+        if(collision.gameObject.name == "Enemy")
+        {
+            Health--;
+        }
+
+        if(collision.gameObject.name == "Wood")
+        {
+            Health = 0;
         }
     }
 

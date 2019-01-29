@@ -6,6 +6,7 @@ public class Spikes : MonoBehaviour {
 
     private float RandomStartTime;
     private float RandomEndTime;
+    public Player player;
 
     void Start()
     {
@@ -26,6 +27,14 @@ public class Spikes : MonoBehaviour {
         GetComponent<Animator>().SetBool("IsReady", false);
         yield return new WaitForSeconds(RandomEndTime);
         StartAnimation();
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject == player)
+        {
+            player.Health--;
+        }
     }
 
 }

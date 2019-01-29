@@ -6,6 +6,7 @@ public class Rocks : MonoBehaviour {
 
     public GameObject SpawnPoint;
     public GameObject Hole;
+    public Player player;
 
     void Start()
     {
@@ -28,5 +29,13 @@ public class Rocks : MonoBehaviour {
         transform.position = SpawnPoint.transform.position;
         GetComponent<Rigidbody>().isKinematic = false;
         StartCoroutine(Respawn());
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+     if(collision.gameObject == player)
+        {
+            player.Health = 0;
+        }
     }
 }

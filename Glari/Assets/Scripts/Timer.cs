@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour {
     void Update()
     {
         Minutes = Mathf.Floor(time / 60).ToString("00");
-        Seconds = Mathf.RoundToInt(time % 60).ToString("00");
+        Seconds = Mathf.Floor(time % 60).ToString("00");
 
         time -= Time.deltaTime;
     }

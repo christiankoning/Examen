@@ -7,6 +7,8 @@ public class Mushroom : MonoBehaviour {
 
     public int MHealth;
     public int MDamage;
+    public GameObject Player;
+    public Player player;
 
     public Transform[] points;
     private int destPoint = 0;
@@ -35,6 +37,7 @@ public class Mushroom : MonoBehaviour {
         if(MHealth <= 0)
         {
             GetComponent<Animator>().SetBool("IsDead", true);
+            gameObject.SetActive(false);
         }
     }
 
@@ -46,5 +49,24 @@ public class Mushroom : MonoBehaviour {
         }
         agent.destination = points[destPoint].position;
         destPoint = (destPoint + 1) % points.Length;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.name == "Fire")
+        {
+            MHealth--;
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject == Player)
+        {
+            player.force = 500;
+            player.Jump();
+            MHealth--;
+            player.force = 250;
+        }
     }
 }
