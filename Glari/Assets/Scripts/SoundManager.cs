@@ -47,10 +47,10 @@ public class SoundManager : MonoBehaviour {
         {
             // Add Cave ambient sound if founded
         }
-        if(SceneManager.GetSceneByBuildIndex(3).isLoaded)
-        {
-            AudioAmb = AddAudio(BossBattle, true, 0.1f);
-            AudioAmb.Play();
-        }
+        //if(SceneManager.GetSceneByBuildIndex(3).isLoaded)
+        //{
+        //    AudioAmb = AddAudio(BossBattle, true, 0.1f);
+        //    AudioAmb.Play();
+        //}
     }
 }

@@ -255,8 +255,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1100842413444514}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.546, z: -6.81}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.53, z: -6.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4891174225825038}
@@ -424,6 +424,9 @@ MonoBehaviour:
   Health: 3
   DeathVoid: {fileID: 0}
   Finish: {fileID: 0}
+  level: 0
+  SManager: {fileID: 0}
+  StartBattle: 0
 --- !u!119 &119103298099679476
 Projector:
   m_ObjectHideFlags: 1

@@ -5,16 +5,32 @@ using UnityEngine;
 public class SmoothCamera : MonoBehaviour {
 
     public GameObject Player;
+    public bool StartBossBattle;
 
     private Vector3 CameraPos;
+    public Vector3 BossCamPos;
     
     void Start()
     {
         CameraPos = transform.position - Player.transform.position;
+        BossCamPos = BossCamPos - Player.transform.position;
     }
 
     void Update()
     {
-        transform.position = Player.transform.position + CameraPos;
+        BossFight();
+    }
+
+    public void BossFight()
+    {
+        if(StartBossBattle == true)
+        {
+            transform.position = Player.transform.position + BossCamPos;
+            transform.rotation = Quaternion.Euler(30, 180, 0);
+        }
+        else
+        {
+            transform.position = Player.transform.position + CameraPos;
+        }
     }
 }

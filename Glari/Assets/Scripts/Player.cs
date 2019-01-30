@@ -35,7 +35,6 @@ public class Player : MonoBehaviour
 
     // Health
     public float Health = 3;
-    public GameObject DeathVoid;
 
     // Finish
     public GameObject Finish;
@@ -44,6 +43,9 @@ public class Player : MonoBehaviour
 
     // Sounds
     public SoundManager SManager;
+
+    //BossBattle
+    public bool StartBattle;
 
 
     void Start()
@@ -76,11 +78,20 @@ public class Player : MonoBehaviour
         velocityClamped = new Vector3(Mathf.Clamp(rb.velocity.x, -moveSpeedMinMax, moveSpeedMinMax), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -moveSpeedMinMax, moveSpeedMinMax));
         sprintVelocity = new Vector3(Mathf.Clamp(rb.velocity.x, -sprintSpeedMinMax, sprintSpeedMinMax), rb.velocity.y, Mathf.Clamp(rb.velocity.z, -sprintSpeedMinMax, sprintSpeedMinMax));
 
-        rb.AddRelativeForce(forceVector);
         rb.velocity = velocityClamped;
 
-        Vector3 movement = new Vector3(horInput, 0.0f, verInput);
-        Model.transform.rotation = Quaternion.LookRotation(movement).normalized;
+        if(StartBattle == false)
+        {
+            Vector3 movement = new Vector3(horInput, 0.0f, verInput);
+            Model.transform.rotation = Quaternion.LookRotation(movement).normalized;
+            rb.AddRelativeForce(forceVector);
+        }
+        else
+        {
+            Vector3 movement = new Vector3(-horInput, 0.0f, -verInput);
+            Model.transform.rotation = Quaternion.LookRotation(movement).normalized;
+            rb.AddRelativeForce(-forceVector);
+        }
 
         if (horInput != 0 || verInput != 0)
         {
@@ -238,7 +249,7 @@ public class Player : MonoBehaviour
             SManager.AudioCollecting.Play();
         }
 
-        if(collision.gameObject == DeathVoid)
+        if(collision.gameObject.name == "DeathGround")
         {
             Health = 0;
         }
