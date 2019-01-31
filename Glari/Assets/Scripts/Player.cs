@@ -297,7 +297,7 @@ public class Player : MonoBehaviour
 
     IEnumerator SeeBoss()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(7);
         rb.isKinematic = false;
     }
 }

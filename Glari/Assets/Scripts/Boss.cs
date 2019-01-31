@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour {
 
@@ -10,6 +11,8 @@ public class Boss : MonoBehaviour {
     public Transform point;
     public Player player;
     private NavMeshAgent agent;
+    public GameObject BossHealthBar;
+    public Slider HealthBarSlider;
 
     // Update is called once per frame
     void Update ()
@@ -24,10 +27,12 @@ public class Boss : MonoBehaviour {
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
             StartCoroutine(Countdown());
+            BossHealthBar.SetActive(true);
         }
         else
         {
             gameObject.GetComponent<Rigidbody>().isKinematic = true;
+            BossHealthBar.SetActive(false);
         }
     }
 
@@ -55,6 +60,9 @@ public class Boss : MonoBehaviour {
 
     void CheckHealth()
     {
+
+        HealthBarSlider.value = BossHealth;
+
         if(BossHealth <= 0)
         {
             // Boss Dies

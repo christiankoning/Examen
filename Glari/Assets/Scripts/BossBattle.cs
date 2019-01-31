@@ -18,6 +18,7 @@ public class BossBattle : MonoBehaviour {
             boss.StartBattle = true;
             player.BossBattleManager();
             sCamera.CutScene = true;
+            sCamera.BossCutScene();
         }
     }
 }

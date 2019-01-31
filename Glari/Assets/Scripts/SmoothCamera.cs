@@ -21,7 +21,6 @@ public class SmoothCamera : MonoBehaviour {
     void Update()
     {
         BossFight();
-        BossCutScene();
     }
 
     public void BossFight()
@@ -34,22 +33,25 @@ public class SmoothCamera : MonoBehaviour {
         else if(StartBossBattle == false && CutScene == false)
         {
             transform.position = Player.transform.position + CameraPos;
+            transform.rotation = Quaternion.Euler(22.423f, 0, 0);
+        }
+        else if(CutScene == true)
+        {
+            transform.LookAt(boss.transform);
+            transform.position = Player.transform.position + BossCamPos;
         }
     }
 
     public void BossCutScene()
     {
-        if(CutScene == true)
-        {
-            transform.LookAt(boss.transform);
-            transform.position = Player.transform.position + BossCamPos;
-            StartCoroutine(EndCutScene());
-        }
+        StartCoroutine(EndCutScene());
+        Player.GetComponent<Player>().enabled = false;
     }
 
     IEnumerator EndCutScene()
     {
         yield return new WaitForSeconds(7);
         CutScene = false;
+        Player.GetComponent<Player>().enabled = true;
     }
 }
