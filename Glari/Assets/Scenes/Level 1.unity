@@ -1901,12 +1901,12 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114998818629191122, guid: 685834f6219c2db4eb537ad25e1bb722,
+    - target: {fileID: 114413604556325940, guid: 685834f6219c2db4eb537ad25e1bb722,
         type: 2}
       propertyPath: player
       value: 
       objectReference: {fileID: 551838985}
-    - target: {fileID: 114413604556325940, guid: 685834f6219c2db4eb537ad25e1bb722,
+    - target: {fileID: 114998818629191122, guid: 685834f6219c2db4eb537ad25e1bb722,
         type: 2}
       propertyPath: player
       value: 
@@ -13831,6 +13831,16 @@ Prefab:
       propertyPath: SManager
       value: 
       objectReference: {fileID: 1465108915}
+    - target: {fileID: 114427185787187614, guid: d0ad34aa7fd2ebc4890ea5d3c6222cc5,
+        type: 2}
+      propertyPath: moveSpeed
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 54413919763575838, guid: d0ad34aa7fd2ebc4890ea5d3c6222cc5,
+        type: 2}
+      propertyPath: m_IsKinematic
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d0ad34aa7fd2ebc4890ea5d3c6222cc5, type: 2}
   m_IsPrefabAsset: 0

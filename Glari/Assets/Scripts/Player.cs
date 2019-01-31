@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
                 if (isGrounded)
                 {
                     Jump();
-                    if (ExtraJump == true)
+                    if (ExtraJump == true || StartBattle == true)
                     {
                         candoublejump = true;
                     }

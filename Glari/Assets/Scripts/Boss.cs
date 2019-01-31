@@ -7,9 +7,9 @@ public class Boss : MonoBehaviour {
 
     public bool StartBattle;
     public int BossHealth;
-    private NavMeshAgent agent;
     public Transform point;
     public Player player;
+    private NavMeshAgent agent;
 
     // Update is called once per frame
     void Update ()
@@ -32,12 +32,13 @@ public class Boss : MonoBehaviour {
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(4);
         StartWalking();
     }
 
     void StartWalking()
     {
+        GetComponent<NavMeshAgent>().enabled = true;
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
         agent.destination = point.position;

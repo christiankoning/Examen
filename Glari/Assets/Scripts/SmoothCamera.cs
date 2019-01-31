@@ -26,7 +26,7 @@ public class SmoothCamera : MonoBehaviour {
         if(StartBossBattle == true)
         {
             transform.position = Player.transform.position + BossCamPos;
-            transform.rotation = Quaternion.Euler(30, 180, 0);
+            transform.rotation = Quaternion.Euler(40, 180, 0);
         }
         else
         {

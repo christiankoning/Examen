@@ -32,11 +32,14 @@ public class HUD : MonoBehaviour {
         }
         else if (player.Health == 1)
         {
+            Heart1.sprite = EmptyHeart;
             Heart2.sprite = EmptyHeart;
         }
 
         else if (player.Health == 2)
         {
+            Heart1.sprite = EmptyHeart;
+            Heart2.sprite = EmptyHeart;
             Heart3.sprite = EmptyHeart;
         }
         else
