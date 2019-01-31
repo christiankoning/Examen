@@ -15,6 +15,7 @@ public class Boss : MonoBehaviour {
     void Update ()
     {
         CheckBattle();
+        CheckHealth();
 	}
 
     void CheckBattle()
@@ -32,7 +33,7 @@ public class Boss : MonoBehaviour {
 
     IEnumerator Countdown()
     {
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(7);
         StartWalking();
     }
 
@@ -49,6 +50,16 @@ public class Boss : MonoBehaviour {
         if (collision.gameObject.name == "Player")
         {
             player.Health = 0;
+        }
+    }
+
+    void CheckHealth()
+    {
+        if(BossHealth <= 0)
+        {
+            // Boss Dies
+            agent.isStopped = true;
+            GetComponent<Animator>().SetBool("IsDead", true);
         }
     }
 }

@@ -6,9 +6,11 @@ public class SmoothCamera : MonoBehaviour {
 
     public GameObject Player;
     public bool StartBossBattle;
+    public GameObject boss;
 
     private Vector3 CameraPos;
     public Vector3 BossCamPos;
+    public bool CutScene;
     
     void Start()
     {
@@ -19,18 +21,35 @@ public class SmoothCamera : MonoBehaviour {
     void Update()
     {
         BossFight();
+        BossCutScene();
     }
 
     public void BossFight()
     {
-        if(StartBossBattle == true)
+        if(StartBossBattle == true && CutScene == false)
         {
             transform.position = Player.transform.position + BossCamPos;
-            transform.rotation = Quaternion.Euler(40, 180, 0);
+            transform.rotation = Quaternion.Euler(30, 180, 0);
         }
-        else
+        else if(StartBossBattle == false && CutScene == false)
         {
             transform.position = Player.transform.position + CameraPos;
         }
+    }
+
+    public void BossCutScene()
+    {
+        if(CutScene == true)
+        {
+            transform.LookAt(boss.transform);
+            transform.position = Player.transform.position + BossCamPos;
+            StartCoroutine(EndCutScene());
+        }
+    }
+
+    IEnumerator EndCutScene()
+    {
+        yield return new WaitForSeconds(7);
+        CutScene = false;
     }
 }

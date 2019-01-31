@@ -62,11 +62,6 @@ public class Player : MonoBehaviour
         HealthManager();
         Hit();
         Collecting();
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            Health--;
-        }
     }
 
     void CheckMovement()
@@ -289,5 +284,20 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(30);
         CanShoot = false;
+    }
+
+    public void BossBattleManager()
+    {
+        if(StartBattle == true)
+        {
+            rb.isKinematic = true;
+            StartCoroutine(SeeBoss());
+        }
+    }
+
+    IEnumerator SeeBoss()
+    {
+        yield return new WaitForSeconds(10);
+        rb.isKinematic = false;
     }
 }

@@ -9,7 +9,6 @@ public class SoundManager : MonoBehaviour {
     public AudioClip PowerUp;
     public AudioClip Collectible;
     public AudioClip FireBallHit;
-    public AudioClip BossBattle;
     public AudioClip Jumping;
 
     private AudioSource AudioAmb;
@@ -43,14 +42,5 @@ public class SoundManager : MonoBehaviour {
             AudioAmb = AddAudio(Forest, true, 0.1f);
             AudioAmb.Play();
         }
-        if(SceneManager.GetSceneByBuildIndex(2).isLoaded)
-        {
-            // Add Cave ambient sound if founded
-        }
-        //if(SceneManager.GetSceneByBuildIndex(3).isLoaded)
-        //{
-        //    AudioAmb = AddAudio(BossBattle, true, 0.1f);
-        //    AudioAmb.Play();
-        //}
     }
 }
