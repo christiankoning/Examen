@@ -111,7 +111,7 @@ public class Player : MonoBehaviour
             {
                 isGrounded = false;
             }
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.JoystickButton0))
             {
                 if (isGrounded)
                 {
@@ -142,7 +142,7 @@ public class Player : MonoBehaviour
 
     void CheckSprint()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.JoystickButton5))
         {
             Sprint();
         }
@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         Debug.DrawRay(FirePosition.transform.position, fwd);
 
-        if (Input.GetMouseButtonDown(0) && CanShoot == false)
+        if (Input.GetMouseButtonDown(0) && CanShoot == false || Input.GetKeyDown(KeyCode.JoystickButton2) && CanShoot == false)
         {
             Model.GetComponent<Animator>().SetBool("IsFighting", true);
             StartCoroutine(Punching());
@@ -187,7 +187,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(0) && CanShoot == true)
+        if(Input.GetMouseButtonDown(0) && CanShoot == true || Input.GetKeyDown(KeyCode.JoystickButton2) && CanShoot == true)
         {
             if(AntiSpam == true)
             {

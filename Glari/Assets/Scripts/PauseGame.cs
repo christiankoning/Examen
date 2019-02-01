@@ -28,7 +28,7 @@ public class PauseGame : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetButtonDown("Cancel") || Input.GetKeyDown(KeyCode.JoystickButton7))
         {
             SwitchPause();
         }
